@@ -1,0 +1,37 @@
+# telegram_bot_python
+
+Telegram bot source code in Python. You can read more tutorials at 
+
+[CodeMyBot.com](http://codemybot.com)
+
+## CHANGELOG
+
+## 0.0.5 - 2018-05-13
+### Added
+- Add 'runner.py', 'handler_bot_test.py' for basic unittest
+
+### Changed
+- Update 'chat.py' to support decorator methods
+
+## 0.0.4 - 2018-04-27
+### Added
+- Add `chat.py` under `models` package to handle message replying
+- Update `bot.py` to use `chat.py`
+
+### Changed
+- Refactor `main.py` into sub modules
+- Use str.format() 
+
+## 0.0.2 - 2018-04-15
+### Added
+- defaultReply method to support all kind of messages
+- Add 'reply_to_message_id' to reply payload. Easier for us to know what message the bot is replying to. 
+
+### Removed
+- Remove 'disable_web_page_preview' from reply payload
+
+
+## 0.0.1 - 2018-04-14
+### Added
+- Initial source code
+- This README file
