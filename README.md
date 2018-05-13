@@ -12,6 +12,7 @@ Telegram bot source code in Python. You can read more tutorials at
 
 ### Changed
 - Update 'chat.py' to support decorator methods
+- Clean repo history
 
 ## 0.0.4 - 2018-04-27
 ### Added
