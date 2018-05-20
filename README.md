@@ -6,6 +6,13 @@ Telegram bot source code in Python. You can read more tutorials at
 
 ## CHANGELOG
 
+## 0.0.6 - 2018-05-20
+### Added
+- Add 'templates/base.html'
+
+### Changed
+- Refactor 'base.py' to use jinja2 for rendering
+
 ## 0.0.5 - 2018-05-13
 ### Added
 - Add 'runner.py', 'handler_bot_test.py' for basic unittest
