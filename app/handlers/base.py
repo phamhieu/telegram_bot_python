@@ -1,13 +1,35 @@
 import webapp2
+import jinja2
+import os
+
+template_dir = os.path.join(os.path.dirname(__file__), '../templates')
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
+                               extensions=['jinja2.ext.autoescape'],
+                               autoescape=False,
+                               trim_blocks=True)
 
 
-class MainPage(webapp2.RequestHandler):
+class Handler(webapp2.RequestHandler):
+    def render_template(self, template_name, **kwargs):
+            if not kwargs:
+                kwargs = {}
+            t = jinja_env.get_template(template_name)
+            self.response.write(t.render(kwargs))
+
+
+class MainPage(Handler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Hello, This\' Telegram Bot website!')
+        kwargs = {
+            'title': 'Home',
+            'myContent': 'Hello, This\' Telegram Bot website!'
+        }
+        self.render_template('base.html', **kwargs)
 
 
-class AboutPage(webapp2.RequestHandler):
+class AboutPage(Handler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('I\'m Telegram Bot')
+        kwargs = {
+            'title': 'About',
+            'myContent': 'I\'m Telegram Bot'
+        }
+        self.render_template('base.html', **kwargs)
