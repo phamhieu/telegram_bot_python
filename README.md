@@ -1,8 +1,6 @@
 # telegram_bot_python
 
-Telegram bot source code in Python. You can read more tutorials at 
-
-[CodeMyBot.com](http://codemybot.com)
+Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.com](http://codemybot.com)
 
 ## CHANGELOG
 
