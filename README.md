@@ -8,11 +8,11 @@ Telegram bot source code in Python. You can read more tutorials at
 
 ## 0.0.8 - 2018-06-01
 ### Added
-- Add "app/templates/about.html"
-- Add "app/templates/home.html"
+- Add `templates/about.html`
+- Add `templates/home.html`
 
 ### Changed
-- Update "base.html" and "base.py" to support 2 new pages
+- Update `base.html` and `base.py` to support 2 new pages
 
 ## 0.0.7 - 2018-05-27
 ### Added
@@ -23,17 +23,17 @@ Telegram bot source code in Python. You can read more tutorials at
 
 ## 0.0.6 - 2018-05-20
 ### Added
-- Add 'templates/base.html'
+- Add `templates/base.html`
 
 ### Changed
-- Refactor 'base.py' to use jinja2 for rendering
+- Refactor `base.py` to use jinja2 for rendering
 
 ## 0.0.5 - 2018-05-13
 ### Added
-- Add 'runner.py', 'handler_bot_test.py' for basic unittest
+- Add `runner.py`, `handler_bot_test.py` for basic unittest
 
 ### Changed
-- Update 'chat.py' to support decorator methods
+- Update `chat.py` to support decorator methods
 - Clean repo history
 
 ## 0.0.4 - 2018-04-27
