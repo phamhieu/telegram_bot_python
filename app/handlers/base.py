@@ -21,15 +21,13 @@ class MainPage(Handler):
     def get(self):
         kwargs = {
             'title': 'Home',
-            'myContent': 'Hello, This\' Telegram Bot website!'
         }
-        self.render_template('base.html', **kwargs)
+        self.render_template('home.html', **kwargs)
 
 
 class AboutPage(Handler):
     def get(self):
         kwargs = {
             'title': 'About',
-            'myContent': 'I\'m Telegram Bot'
         }
-        self.render_template('base.html', **kwargs)
+        self.render_template('about.html', **kwargs)
