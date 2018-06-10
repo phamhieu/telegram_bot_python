@@ -4,6 +4,15 @@ Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.co
 
 ## CHANGELOG
 
+## 0.0.9 - 2018-06-10
+### Added
+- Add `templates/settings.html`
+- Add `templates/403.html`
+- Support `login`/`logout` with Google Sign-In
+
+### Changed
+- Update `main.py` and `base.py`
+
 ## 0.0.8 - 2018-06-01
 ### Added
 - Add `templates/about.html`
