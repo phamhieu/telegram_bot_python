@@ -15,6 +15,7 @@
             {% set navbar_menus = [
             ('/', 'home', 'Home'),
             ('/about', 'about', 'About'),
+            ('/settings', 'settings', 'Settings'),
             ] -%}
             {% set active_page = active_page|default('home') -%}
             {% for href, id, caption in navbar_menus %}
