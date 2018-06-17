@@ -13,10 +13,13 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 class Handler(webapp2.RequestHandler):
     def render_template(self, template_name, **kwargs):
-            if not kwargs:
-                kwargs = {}
-            t = jinja_env.get_template(template_name)
-            self.response.write(t.render(kwargs))
+        if not kwargs:
+            kwargs = {}
+        user = users.get_current_user()
+        if user:
+            kwargs['user'] = user
+        t = jinja_env.get_template(template_name)
+        self.response.write(t.render(kwargs))
 
 
 class MainPage(Handler):
