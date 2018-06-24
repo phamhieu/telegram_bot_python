@@ -9,7 +9,5 @@ app = webapp2.WSGIApplication([
     ('/', base.MainPage),
     ('/about', base.AboutPage),
     ('/settings', base.SettingsPage),
-    ('/set_webhook', bot.SetWebhookHandler),
-    ('/get_webhook', bot.GetWebhookHandler),
     ('/webhook', bot.WebhookHandler),
 ], debug=True)
