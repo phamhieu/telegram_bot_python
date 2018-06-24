@@ -4,6 +4,11 @@ Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.co
 
 ## CHANGELOG
 
+## 0.1.1 - 2018-06-24
+### Changed
+- Support get/update Telegram webhook from settings page.
+- Clean up get/update webhook routes.
+
 ## 0.1.0 - 2018-06-17
 ### Changed
 - Update `base.py`, `base.html` with login/logout menu item.
