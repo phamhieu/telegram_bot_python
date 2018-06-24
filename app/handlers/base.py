@@ -1,8 +1,12 @@
 import webapp2
 import jinja2
+import json
 import os
 
 from google.appengine.api import users
+from google.appengine.api import urlfetch
+
+import app.handlers.bot as telegramBot
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
@@ -56,11 +60,67 @@ class SettingsPage(Handler):
                 return webapp2.redirect_to("login")
         return func_wrapper
 
+    def __get_webhook_url(self):
+        url = '{0}/getWebhookInfo'.format(telegramBot.BASE_URL)
+        try:
+            result = urlfetch.fetch(url)
+            if result.status_code == 200:
+                jsonstr = result.content
+                jsonobj = json.loads(jsonstr)
+                return jsonobj['result']['url']
+            else:
+                return None
+        except:
+            return None
+
+    def __set_webhook_url(self, new_url):
+        url = '{0}/setWebhook?url={1}'.format(telegramBot.BASE_URL, new_url)
+        try:
+            result = urlfetch.fetch(url)
+            if result.status_code == 200:
+                jsonstr = result.content
+                jsonobj = json.loads(jsonstr)
+                message = jsonobj['description']
+                if 'error_code' in jsonobj:
+                    success = False
+                    error_code = jsonobj['error_code']
+                    message = 'Code({0}) {1}'.format(error_code, message)
+                else:
+                    success = True
+                return success, message
+            else:
+                return False, None
+        except:
+            return False, None
+
     @__admin_required
     def get(self):
         kwargs = {
             'title': 'Settings',
         }
+        kwargs['webhook_url_value'] = self.__get_webhook_url()
+        self.render_template('settings.html', **kwargs)
+
+    @__admin_required
+    def post(self):
+        kwargs = {
+            'page_name': 'Webhooks'
+        }
+        new_url = self.request.get('webhook_url')
+        success, message = self.__set_webhook_url(new_url)
+        if success:
+            kwargs['message'] = {
+                'category': 'success',
+                'title': 'Success!',
+                'text': message
+            }
+            kwargs['webhook_url_value'] = new_url
+        else:
+            kwargs['message'] = {
+                'category': 'danger',
+                'title': 'Error!',
+                'text': message
+            }
         self.render_template('settings.html', **kwargs)
 
 
