@@ -4,6 +4,13 @@ Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.co
 
 ## CHANGELOG
 
+## 0.1.2 - 2018-07-01
+### Added
+- Add `models/config.py`
+
+## Changed
+- Update `base.py`,`bot.py`,`chat.py` to get Telegram token from config model.
+
 ## 0.1.1 - 2018-06-24
 ### Changed
 - Support get/update Telegram webhook from settings page.
