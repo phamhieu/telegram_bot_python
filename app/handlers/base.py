@@ -6,7 +6,7 @@ import os
 from google.appengine.api import users
 from google.appengine.api import urlfetch
 
-import app.handlers.bot as telegramBot
+from app.models.config import TelegramConfig
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
@@ -43,6 +43,10 @@ class AboutPage(Handler):
 
 
 class SettingsPage(Handler):
+    def __init__(self, *args, **kwargs):
+        super(SettingsPage, self).__init__(*args, **kwargs)
+        self.telegramBaseUrl = TelegramConfig().get_base_url()
+
     def __admin_required(func):
         def func_wrapper(self, *args, **kwargs):
             user = users.get_current_user()
@@ -61,7 +65,7 @@ class SettingsPage(Handler):
         return func_wrapper
 
     def __get_webhook_url(self):
-        url = '{0}/getWebhookInfo'.format(telegramBot.BASE_URL)
+        url = '{0}/getWebhookInfo'.format(self.telegramBaseUrl)
         try:
             result = urlfetch.fetch(url)
             if result.status_code == 200:
@@ -74,7 +78,7 @@ class SettingsPage(Handler):
             return None
 
     def __set_webhook_url(self, new_url):
-        url = '{0}/setWebhook?url={1}'.format(telegramBot.BASE_URL, new_url)
+        url = '{0}/setWebhook?url={1}'.format(self.telegramBaseUrl, new_url)
         try:
             result = urlfetch.fetch(url)
             if result.status_code == 200:

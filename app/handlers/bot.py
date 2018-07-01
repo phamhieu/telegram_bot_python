@@ -6,9 +6,6 @@ from google.appengine.api import urlfetch
 
 import app.models.chat as chat
 
-TOKEN = 'xxxxxx:YOUR_TELEGRAM_BOT_TOKEN'
-BASE_URL = 'https://api.telegram.org/bot' + TOKEN
-
 
 class WebhookHandler(webapp2.RequestHandler):
     def post(self):

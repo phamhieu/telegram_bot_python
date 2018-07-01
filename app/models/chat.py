@@ -2,14 +2,14 @@ import logging
 import urllib
 import urllib2
 
-TOKEN = 'xxxxxx:YOUR_TELEGRAM_BOT_TOKEN'
-BASE_URL = 'https://api.telegram.org/bot' + TOKEN
+from app.models.config import TelegramConfig
 
 
 class Handler(object):
     def __init__(self, body):
         self.body = body
         self.message = self.__get_message()
+        self.telegramBaseUrl = TelegramConfig().get_base_url()
 
     def __get_message(self):
         if self.body:
@@ -75,7 +75,7 @@ class Handler(object):
     def send_reply(self):
         reply_method, data = self.get_reply()
         if data:
-            requestUrl = '{}/{}'.format(BASE_URL, reply_method)
+            requestUrl = '{}/{}'.format(self.telegramBaseUrl, reply_method)
             resp = urllib2.urlopen(requestUrl, data).read()
             logging.info('Reply is sent with response: {0}'.format(resp))
         else:
