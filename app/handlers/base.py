@@ -2,6 +2,7 @@ import webapp2
 import jinja2
 import json
 import os
+import logging
 
 from google.appengine.api import users
 from google.appengine.api import urlfetch
@@ -45,13 +46,14 @@ class AboutPage(Handler):
 class SettingsPage(Handler):
     def __init__(self, *args, **kwargs):
         super(SettingsPage, self).__init__(*args, **kwargs)
-        self.telegramBaseUrl = TelegramConfig().get_base_url()
+        self.telegramBaseUrl = TelegramConfig.get_base_url()
 
     def __admin_required(func):
         def func_wrapper(self, *args, **kwargs):
             user = users.get_current_user()
             if user:
                 email = user.email()
+                logging.info('email = {}'.format(email))
                 admins = [
                     "admin1@gmail.com",
                     "admin2@gmail.com"
@@ -103,6 +105,7 @@ class SettingsPage(Handler):
             'title': 'Settings',
         }
         kwargs['webhook_url_value'] = self.__get_webhook_url()
+        kwargs['telegram_token_value'] = TelegramConfig.get_telgram_token()
         self.render_template('settings.html', **kwargs)
 
     @__admin_required

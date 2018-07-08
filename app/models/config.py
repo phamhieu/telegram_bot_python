@@ -36,6 +36,11 @@ TELEGRAM_BOT_TOKEN_KEY = "TELEGRAM_BOT_TOKEN_KEY"
 
 
 class TelegramConfig(Config):
+    @classmethod
+    def get_telgram_token(self):
+        return self.get(TELEGRAM_BOT_TOKEN_KEY)
+
+    @classmethod
     def get_base_url(self):
         token = self.get(TELEGRAM_BOT_TOKEN_KEY)
         return 'https://api.telegram.org/bot{}'.format(token)

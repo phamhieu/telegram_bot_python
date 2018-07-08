@@ -9,7 +9,7 @@ class Handler(object):
     def __init__(self, body):
         self.body = body
         self.message = self.__get_message()
-        self.telegramBaseUrl = TelegramConfig().get_base_url()
+        self.telegramBaseUrl = TelegramConfig.get_base_url()
 
     def __get_message(self):
         if self.body:
