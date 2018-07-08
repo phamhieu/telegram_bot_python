@@ -4,6 +4,11 @@ Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.co
 
 ## CHANGELOG
 
+## 0.1.3 - 2018-07-08
+### Changed
+- Update `settings.html`, `base.py` to view secret values on settings page.
+- Refactor `config.py`, `chat.py`.
+
 ## 0.1.2 - 2018-07-01
 ### Added
 - Add `models/config.py`
