@@ -4,6 +4,15 @@ Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.co
 
 ## CHANGELOG
 
+## 0.1.4 - 2018-07-15
+### Added
+- Add `settings.py` to manage all settings handlers.
+- Add `settings.config.html`, `settings.webhook.html` templates.
+
+### Changed
+- Refactor app settings into sub pages. Right now we have config and webhook pages.
+- Update templates for better layout.
+
 ## 0.1.3 - 2018-07-08
 ### Changed
 - Update `settings.html`, `base.py` to view secret values on settings page.
