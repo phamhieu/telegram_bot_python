@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+
+{% set active_page = "settings" %}
+
+{% block title %}Settings{% endblock title %}
+
+{% block main_content %}
+
+{% set navbar_menus = [
+    ('/settings/config', 'config', 'Config'),
+    ('/settings/webhook', 'webhook', 'Webhook')
+] -%}
+
+{% set active_setting = active_setting|default('config') -%}
+
+<div class="main-center">
+  <div class="row">
+    <div class="col-3">
+      <ul class="nav flex-column nav-pills">
+        {% for href, id, caption in navbar_menus %}
+          <li class="nav-item">
+            <a class="nav-link {% if id == active_setting %} active {% endif%}" href="{{ href }}">
+              {{ caption }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-8">
+      <h2>{{ page_name }}</h2><hr/>
+      {% block settings_content %}
+      {% endblock settings_content %}
+    </div>
+  </div>
+</div>
+{% endblock main_content %}

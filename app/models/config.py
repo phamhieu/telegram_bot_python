@@ -8,6 +8,12 @@ class Config(ndb.Model):
     value = ndb.StringProperty()
 
     @classmethod
+    def set(self, name, inputValue):
+        entity = self(key=model.Key(self, name))
+        entity.populate(value=inputValue)
+        entity.put()
+
+    @classmethod
     def get(self, name):
         NOT_SET_VALUE = u'!!!__ NOT SET __!!!'
 
@@ -39,6 +45,10 @@ class TelegramConfig(Config):
     @classmethod
     def get_telgram_token(self):
         return self.get(TELEGRAM_BOT_TOKEN_KEY)
+
+    @classmethod
+    def set_telegram_token(self, inputValue):
+        self.set(TELEGRAM_BOT_TOKEN_KEY, inputValue)
 
     @classmethod
     def get_base_url(self):
