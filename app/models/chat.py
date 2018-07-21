@@ -62,8 +62,27 @@ class Handler(object):
         }
         return 'sendSticker', data
 
+    @__encode_reply_decorator
+    @__get_reply_decorator
+    def __get_command_reply(self):
+        commant_text = self.message['text']
+        if '/sayhello' in commant_text:
+            msg = 'Hi, nice to meet you'
+            reply_dict = {
+                'text': msg.encode('utf-8')
+            }
+        else:
+            msg = 'I know this command. Let me think...'
+            reply_dict = {'text': msg.encode('utf-8')}
+        return 'sendMessage', reply_dict
+
     def get_reply(self):
         if self.message:
+            if 'entities' in self.message:
+                for entity in self.message['entities']:
+                    if entity['type'] == 'bot_command':
+                        return self.__get_command_reply()
+            # if not command reply, check for other replies
             if 'sticker' in self.message:
                 return self.__get_sticker_reply()
             elif 'text' in self.message:
