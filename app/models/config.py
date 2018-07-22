@@ -1,4 +1,5 @@
 import logging
+from os import environ
 
 from google.appengine.ext import ndb
 from google.appengine.ext.ndb import model
@@ -21,6 +22,14 @@ class Config(ndb.Model):
         entity.populate(value=NOT_SET_VALUE)
         txn = lambda: entity.put() if not entity.key.get() else entity.key
         retval = model.transaction(txn).get()
+
+        # Fall back to environment vars
+        if retval.value == NOT_SET_VALUE:
+            fallback_value = environ.get(name)
+            if fallback_value is not None:
+                retval.value = fallback_value
+                retval.put()
+                return fallback_value
 
         if retval.value == NOT_SET_VALUE:
             logging.error((
