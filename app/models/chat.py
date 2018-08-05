@@ -3,6 +3,7 @@ import urllib
 import urllib2
 
 from app.models.config import TelegramConfig
+from app.utils import gemini
 
 
 class Handler(object):
@@ -66,7 +67,21 @@ class Handler(object):
     @__get_reply_decorator
     def __get_command_reply(self):
         commant_text = self.message['text']
-        if '/sayhello' in commant_text:
+        if '/checkbcprice' in commant_text:
+            last_price = gemini.get_btc_price()
+            if last_price is not None:
+                msg = '1 btcUSD = $' + last_price
+            else:
+                msg = 'Failed to retrieve price data.'
+            reply_dict = {'text': msg.encode('utf-8')}
+        elif '/checkbcbooking' in commant_text:
+            max_bid, min_ask = gemini.get_btc_booking()
+            if max_bid is not None and min_ask is not None:
+                msg = 'maxBid= $' + str(max_bid) + '  |  minAsk=$' + str(min_ask)
+            else:
+                msg = 'Failed to retrieve booking data.'
+            reply_dict = {'text': msg.encode('utf-8')}
+        elif '/sayhello' in commant_text:
             msg = 'Hi, nice to meet you'
             reply_dict = {
                 'text': msg.encode('utf-8')
