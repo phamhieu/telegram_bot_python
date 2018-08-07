@@ -4,6 +4,10 @@ Telegram bot source code in Python. You can read more tutorials at [CodeMyBot.co
 
 ## CHANGELOG
 
+## 0.1.6 - 2018-08-07
+### Changed
+- Update `chat.py` to support bitcoin price check commands.
+
 ## 0.1.5 - 2018-07-22
 ### Changed
 - Update `config.py` to fall back to environment vars when there is no database record. This feature supports our unit test.
